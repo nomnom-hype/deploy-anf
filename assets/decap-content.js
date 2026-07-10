@@ -315,8 +315,13 @@
     if (data?.hero_section?.bg_image) setImage(".avf-hero img", data.hero_section.bg_image, data?.hero_section?.title);
     if (data?.section_one?.left_photo) setImage(".anilvideofilms-studio-intro__image:first-child img, .anilvideofilms-modern-approach__left img", data.section_one.left_photo, "Studio image");
     if (data?.section_one?.right_photo) setImage(".anilvideofilms-studio-intro__image:last-child img, .anilvideofilms-modern-approach__right img", data.section_one.right_photo, "Studio image");
-    const copy = document.querySelector(".anilvideofilms-studio-intro__copy p, .anilvideofilms-modern-approach__copy p");
-    if (copy && data?.section_one?.middle_text) copy.textContent = data.section_one.middle_text;
+    const studioIntroText = document.getElementById("studio-intro-text");
+    if (studioIntroText && data?.section_one?.middle_text) {
+      document.getElementById("studio-intro-text").innerText = data.section_one.middle_text;
+    } else {
+      const copy = document.querySelector(".anilvideofilms-studio-intro__copy p, .anilvideofilms-modern-approach__copy p");
+      if (copy && data?.section_one?.middle_text) copy.textContent = data.section_one.middle_text;
+    }
     renderCollage(data?.section_two_collage || []);
 
     if (data?.section_four_video?.youtube_url) {
