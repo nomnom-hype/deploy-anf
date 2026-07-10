@@ -16,7 +16,7 @@ collections:
     files:
       - name: "homepage"
         label: "Homepage"
-        file: "index.html"
+        file: "deploy anf/index.html"
         format: "frontmatter"
         fields:
           - label: "Hero Section"
@@ -44,7 +44,7 @@ collections:
 
       - name: "about"
         label: "About Us"
-        file: "main-pages/01-about/index.html"
+        file: "deploy anf/main-pages/01-about/index.html"
         format: "frontmatter"
         fields:
           - { label: "Headline", name: "headline", widget: "string", default: "The people" }
@@ -61,7 +61,7 @@ collections:
 
       - name: "photography"
         label: "Photography Page"
-        file: "main-pages/02-photography/index.html"
+        file: "deploy anf/main-pages/02-photography/index.html"
         format: "frontmatter"
         fields:
           - { label: "Page Title", name: "title", widget: "string", default: "Photography" }
@@ -70,7 +70,7 @@ collections:
 
       - name: "films"
         label: "Films Page"
-        file: "main-pages/03-films/index.html"
+        file: "deploy anf/main-pages/03-films/index.html"
         format: "frontmatter"
         fields:
           - { label: "Page Title", name: "title", widget: "string", default: "Films" }
@@ -79,7 +79,7 @@ collections:
 
       - name: "pre_wedding"
         label: "Pre Wedding Page"
-        file: "main-pages/06-pre-wedding/index.html"
+        file: "deploy anf/main-pages/06-pre-wedding/index.html"
         format: "frontmatter"
         fields:
           - { label: "Page Title", name: "title", widget: "string", default: "Pre Wedding" }
@@ -91,7 +91,7 @@ collections:
 
   - name: "photography_clients"
     label: "Photography Client Pages"
-    folder: "subpages/photography"
+    folder: "deploy anf/subpages/photography"
     path: "{{slug}}/index"
     extension: "html"
     format: "frontmatter"
@@ -113,7 +113,7 @@ collections:
 
   - name: "film_clients"
     label: "Film Client Pages"
-    folder: "subpages/films"
+    folder: "deploy anf/subpages/films"
     path: "{{slug}}/index"
     extension: "html"
     format: "frontmatter"

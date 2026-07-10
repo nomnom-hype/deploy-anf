@@ -158,19 +158,35 @@
   function youtubeEmbedUrl(url) {
     const raw = String(url || "").trim();
     if (!raw) return "";
-    let videoId = "";
+
+    const cleanId = (value) => {
+      const id = String(value || "").split(/[?&#/]/)[0].trim();
+      return /^[a-zA-Z0-9_-]{6,}$/.test(id) ? id : "";
+    };
 
     try {
-      const parsed = new URL(raw);
-      if (parsed.hostname.includes("youtu.be")) videoId = parsed.pathname.replace("/", "");
-      if (parsed.searchParams.get("v")) videoId = parsed.searchParams.get("v");
-      if (parsed.pathname.includes("/embed/")) videoId = parsed.pathname.split("/embed/")[1].split("/")[0];
-      if (parsed.pathname.includes("/shorts/")) videoId = parsed.pathname.split("/shorts/")[1].split("/")[0];
-    } catch (error) {
-      videoId = raw;
-    }
+      const parsed = new URL(raw, window.location.origin);
+      const host = parsed.hostname.replace(/^www\./, "");
+      let videoId = "";
 
-    return videoId ? `https://www.youtube.com/embed/${encodeURIComponent(videoId)}?rel=0` : raw;
+      if (host === "youtu.be") {
+        videoId = cleanId(parsed.pathname.slice(1));
+      } else if (host.endsWith("youtube.com") || host.endsWith("youtube-nocookie.com")) {
+        videoId = cleanId(parsed.searchParams.get("v"));
+
+        if (!videoId) {
+          const pathParts = parsed.pathname.split("/").filter(Boolean);
+          const videoPathKeys = ["embed", "shorts", "live", "v"];
+          const keyIndex = pathParts.findIndex((part) => videoPathKeys.includes(part));
+          if (keyIndex > -1) videoId = cleanId(pathParts[keyIndex + 1]);
+        }
+      }
+
+      return videoId ? `https://www.youtube.com/embed/${encodeURIComponent(videoId)}?rel=0` : "";
+    } catch (error) {
+      const directId = cleanId(raw);
+      return directId ? `https://www.youtube.com/embed/${encodeURIComponent(directId)}?rel=0` : "";
+    }
   }
 
   function setImage(selector, src, alt) {
