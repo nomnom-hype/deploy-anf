@@ -1,0 +1,135 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+publish_mode: editorial_workflow
+
+site_url: "/"
+display_url: "/"
+logo_url: "/assets/logo.png"
+
+collections:
+  - name: "main_pages"
+    label: "Main Pages"
+    files:
+      - name: "homepage"
+        label: "Homepage"
+        file: "index.html"
+        format: "frontmatter"
+        fields:
+          - label: "Hero Section"
+            name: "hero_section"
+            widget: "object"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Hero Background Image", name: "bg_image", widget: "image" }
+          - label: "Studio Intro"
+            name: "section_one"
+            widget: "object"
+            fields:
+              - { label: "Left Photo", name: "left_photo", widget: "image" }
+              - { label: "Middle Text", name: "middle_text", widget: "text" }
+              - { label: "Right Photo", name: "right_photo", widget: "image" }
+          - label: "Homepage Collage"
+            name: "section_two_collage"
+            widget: "list"
+            field: { label: "Image", name: "image", widget: "image" }
+          - label: "Video Section"
+            name: "section_four_video"
+            widget: "object"
+            fields:
+              - { label: "YouTube URL", name: "youtube_url", widget: "string", required: false }
+
+      - name: "about"
+        label: "About Us"
+        file: "main-pages/01-about/index.html"
+        format: "frontmatter"
+        fields:
+          - { label: "Headline", name: "headline", widget: "string", default: "The people" }
+          - { label: "Italic Headline", name: "headline_italic", widget: "string", default: "behind forever." }
+          - label: "8 Team Member Cards"
+            name: "team_members"
+            widget: "list"
+            max: 8
+            fields:
+              - { label: "Member Name", name: "member_name", widget: "string" }
+              - { label: "Designation", name: "designation", widget: "string" }
+              - { label: "Member Photo", name: "member_photo", widget: "image" }
+          - { label: "Big Team Photo", name: "big_team_photo", widget: "image" }
+
+      - name: "photography"
+        label: "Photography Page"
+        file: "main-pages/02-photography/index.html"
+        format: "frontmatter"
+        fields:
+          - { label: "Page Title", name: "title", widget: "string", default: "Photography" }
+          - { label: "Hero Image", name: "hero_image", widget: "image", required: false }
+          - { label: "Intro Text", name: "intro_text", widget: "text", required: false }
+
+      - name: "films"
+        label: "Films Page"
+        file: "main-pages/03-films/index.html"
+        format: "frontmatter"
+        fields:
+          - { label: "Page Title", name: "title", widget: "string", default: "Films" }
+          - { label: "Hero Image", name: "hero_image", widget: "image", required: false }
+          - { label: "Intro Text", name: "intro_text", widget: "text", required: false }
+
+      - name: "pre_wedding"
+        label: "Pre Wedding Page"
+        file: "main-pages/06-pre-wedding/index.html"
+        format: "frontmatter"
+        fields:
+          - { label: "Page Title", name: "title", widget: "string", default: "Pre Wedding" }
+          - { label: "Hero Image", name: "hero_image", widget: "image", required: false }
+          - label: "Pre Wedding Collage"
+            name: "pre_wedding_collage"
+            widget: "list"
+            field: { label: "Image", name: "image", widget: "image" }
+
+  - name: "photography_clients"
+    label: "Photography Client Pages"
+    folder: "subpages/photography"
+    path: "{{slug}}/index"
+    extension: "html"
+    format: "frontmatter"
+    create: true
+    slug: "{{client_name}}"
+    fields:
+      - { label: "Client Name", name: "client_name", widget: "string" }
+      - { label: "Date / Year", name: "wedding_date", widget: "string", required: false }
+      - { label: "Category", name: "category", widget: "select", options: ["Wedding", "Engagement / Mehendi", "Pre Wedding"], default: "Wedding" }
+      - { label: "Show on Homepage", name: "show_on_homepage", widget: "boolean", default: false }
+      - { label: "Card Thumbnail", name: "card_image", widget: "image" }
+      - { label: "Hero Banner Picture", name: "hero_image", widget: "image" }
+      - { label: "Short Card Story", name: "short_story", widget: "text", required: false }
+      - { label: "Full Story Body", name: "full_story_body", widget: "markdown" }
+      - label: "Client Photo Gallery"
+        name: "client_photo_gallery"
+        widget: "list"
+        field: { label: "Image", name: "image", widget: "image" }
+
+  - name: "film_clients"
+    label: "Film Client Pages"
+    folder: "subpages/films"
+    path: "{{slug}}/index"
+    extension: "html"
+    format: "frontmatter"
+    create: true
+    slug: "{{client_name}}"
+    fields:
+      - { label: "Client Name", name: "client_name", widget: "string" }
+      - { label: "Date / Year", name: "wedding_date", widget: "string", required: false }
+      - { label: "Category", name: "category", widget: "select", options: ["Wedding", "Engagement / Mehendi", "Pre Wedding"], default: "Wedding" }
+      - { label: "Show on Homepage", name: "show_on_homepage", widget: "boolean", default: false }
+      - { label: "Card Thumbnail", name: "card_image", widget: "image" }
+      - { label: "Hero Banner Picture", name: "hero_image", widget: "image" }
+      - { label: "Primary YouTube Video URL", name: "video_url", widget: "string" }
+      - { label: "Short Card Story", name: "short_story", widget: "text", required: false }
+      - { label: "Full Story Body", name: "full_story_body", widget: "markdown" }
+      - label: "Client Film Stills Gallery"
+        name: "client_film_stills_gallery"
+        widget: "list"
+        field: { label: "Image", name: "image", widget: "image" }
